@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: tnasibullin
+      changes:
+        - createTable:
+            tableName: notebooks
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2
+      author: tnasibullin
+      changes:
+        - createTable:
+            tableName: notes
+            columns:
+              - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: header
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: body
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: notebook_id
+                  type: long
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+             constraintName: fk_note_notebook
+             baseTableName: notes
+             baseColumnNames: notebook_id
+             referencedTableName: notebooks
+             referencedColumnNames: id
