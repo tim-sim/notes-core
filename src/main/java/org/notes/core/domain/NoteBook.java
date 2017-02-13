@@ -1,4 +1,4 @@
-package org.tim.domain;
+package org.notes.core.domain;
 
 import javax.persistence.*;
 import java.util.Set;

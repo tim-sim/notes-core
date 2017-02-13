@@ -1,4 +1,7 @@
-package org.tim.dto;
+package org.notes.core.dto;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Timur Nasibullin
@@ -8,6 +11,7 @@ public class NoteDto {
     private Long id;
     private String header;
     private String body;
+    private Set<String> tags = new HashSet<>();
 
     public NoteDto() {
     }
@@ -40,5 +44,13 @@ public class NoteDto {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
     }
 }

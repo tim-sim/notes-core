@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="1" author="tnasibullin">
+        <createTable tableName="notebooks">
+            <column name="id" type="long" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="notes">
+            <column name="id" type="long" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="header" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="body" type="text"/>
+            <column name="notebook_id" type="long">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_note_notebook"
+                                 baseTableName="notes" baseColumnNames="notebook_id"
+                                 referencedTableName="notebooks" referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2" author="tnasibullin">
+        <createTable tableName="tags">
+            <column name="id" type="long" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="tag_name_unique"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="note_tag_links">
+            <column name="tag_id" type="long">
+                <constraints nullable="false"/>
+            </column>
+            <column name="note_id" type="long">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="fk_tag_link" baseTableName="note_tag_links" baseColumnNames="tag_id"
+                                 referencedTableName="tags" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_note_link" baseTableName="note_tag_links" baseColumnNames="note_id"
+                                 referencedTableName="notes" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

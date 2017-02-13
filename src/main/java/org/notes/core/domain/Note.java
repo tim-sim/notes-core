@@ -1,6 +1,7 @@
-package org.tim.domain;
+package org.notes.core.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * @author Timur Nasibullin
@@ -13,11 +14,16 @@ public class Note {
     private Long id;
     @Column(nullable = false)
     private String header;
-    @Column(nullable = false)
+    @Column
     private String body;
     @ManyToOne
     @JoinColumn(name = "notebook_id")
     private NoteBook noteBook;
+    @ManyToMany
+    @JoinTable(name = "note_tag_links",
+               joinColumns = @JoinColumn(name = "note_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
+    private Set<Tag> tags;
 
     public Note() {
     }
@@ -57,5 +63,13 @@ public class Note {
 
     public void setNoteBook(NoteBook noteBook) {
         this.noteBook = noteBook;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 }

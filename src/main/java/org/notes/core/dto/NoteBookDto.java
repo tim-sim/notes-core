@@ -1,4 +1,4 @@
-package org.tim.dto;
+package org.notes.core.dto;
 
 /**
  * @author Timur Nasibullin

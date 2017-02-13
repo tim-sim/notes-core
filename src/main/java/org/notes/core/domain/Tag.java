@@ -1,11 +1,17 @@
-package org.tim.domain;
+package org.notes.core.domain;
+
+import javax.persistence.*;
 
 /**
  * @author Timur Nasibullin
  * @since 1/20/2017
  */
+@Entity
+@Table(name = "tags")
 public class Tag {
+    @Id @GeneratedValue
     private Long id;
+    @Column(nullable = false)
     private String name;
 
     public Long getId() {

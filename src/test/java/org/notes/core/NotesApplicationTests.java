@@ -1,4 +1,4 @@
-package org.tim;
+package org.notes.core;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

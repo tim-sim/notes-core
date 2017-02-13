@@ -1,7 +1,7 @@
-package org.tim.service;
+package org.notes.core.service;
 
 import org.springframework.data.repository.CrudRepository;
-import org.tim.domain.Note;
+import org.notes.core.domain.Note;
 
 /**
  * @author Timur Nasibullin
